@@ -1,1 +1,30 @@
+CREATE TABLE Kayttaja
+(
+KayttajaID int PRIMARY KEY,
+Tunnus varchar,
+Salasana varchar,
+Super boolean
+);
 
+CREATE TABLE Keskustelu
+(
+ID int PRIMARY KEY,
+Otsikko varchar,
+alue_id int FOREIGN KEY REFERENCES Alue (ID)
+);
+
+CREATE TABLE Alue
+(
+ID int PRIMARY KEY,
+otsikko varchar,
+);
+
+CREATE TABLE Viesti
+(
+ID int PRIMARY KEY,
+kayttaja_id int FOREIGN KEY REFERENCES Kayttaja (KayttajaID),
+keskustelu_id int FOREIGN KEY REFERENCES Keskustelu (ID),
+aika datetime
+);
+
+Tossa nyt laitoin samalla kaikki, saa korjata :D
