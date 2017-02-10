@@ -1,0 +1,45 @@
+Mitä käyttötapauksia tietokannassa on?
+--------------------------------------
+-Keskustelun 1234 viestit aikajärjestyksessä
+SELECT * FROM Viesti
+INNER JOIN Keskustelu
+	ON keskustelu.id = viesti.keskustelu_id
+WHERE viesti.keskustelu_id = 1234
+ORDER BY viesti.paivamaara ASC;
+
+-Alueen 2 keskustelut aakkosjärjestyksessä
+SELECT * FROM Keskustelu
+INNER JOIN Alue
+	ON alue.id = keskustelu.alue_id
+WHERE Alue.id = 2
+ORDER BY Keskustelu.otsikko;
+
+-Hae keskustelun 1234 uusimman viestin päivämäärä
+SELECT TOP 1 Viesti.timestamp FROM Viesti 
+INNER JOIN Keskustelu
+	ON keskustelu.id = viesti.keskustelu_id
+WHERE viesti.keskustelu_id = 1234
+ORDER BY Viesti.timestamp DESC;
+
+-Hae keskustelun 1234 ensimmäisen viestin päivämäärä
+SELECT TOP 1 Viesti.timestamp FROM Viesti 
+INNER JOIN Keskustelu
+	ON keskustelu.id = viesti.keskustelu_id
+WHERE viesti.keskustelu_id = 1234
+ORDER BY Viesti.timestamp ASC;
+
+-Paljonko viestejä alueella 2
+SELECT COUNT * FROM Viesti
+INNER JOIN Keskustelu
+	on keskustelu.id = viesti.keskustelu_id
+WHERE keskustelu.alue_id = 2;
+
+-Paljonko viestejä keskustelussa 555
+SELECT COUNT * FROM Viesti
+INNER JOIN Keskustelu
+	on Keskustelu.id = viesti.keskustelu_id
+WHERE viesti.keskustelu_id = 555;
+
+-Alueet aakkosjärjestyksessä
+SELECT * FROM Alue
+ORDER BY Alue.otsikko;
