@@ -1,13 +1,17 @@
 package tikape.runko.domain;
 
-public class Opiskelija {
+public class Kayttaja {
 
     private Integer id;
     private String nimi;
+    private String tunnus;
+    private String salasana;
 
-    public Opiskelija(Integer id, String nimi) {
+    public Kayttaja(Integer id, String nimi, String tunnus, String salasana) {
         this.id = id;
         this.nimi = nimi;
+        this.tunnus = tunnus;
+        this.salasana = salasana;
     }
 
     public Integer getId() {

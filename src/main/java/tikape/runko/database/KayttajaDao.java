@@ -11,18 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tikape.runko.domain.Opiskelija;
+import tikape.runko.domain.Kayttaja;
+import tikape.database.collector.UserCollector;
 
-public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
+public class KayttajaDao implements Dao<Kayttaja, Integer> {
 
     private Database database;
 
-    public OpiskelijaDao(Database database) {
+    public KayttajaDao(Database database) {
         this.database = database;
     }
 
     @Override
-    public Opiskelija findOne(Integer key) throws SQLException {
+    public Kayttaja findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija WHERE id = ?");
         stmt.setObject(1, key);
@@ -35,8 +36,10 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
         Integer id = rs.getInt("id");
         String nimi = rs.getString("nimi");
+        String tunnus = rs.getString("tunnus");
+        String salasana = rs.getString("salasana");
 
-        Opiskelija o = new Opiskelija(id, nimi);
+        Kayttaja o = new Kayttaja(id, nimi, tunnus, salasana);
 
         rs.close();
         stmt.close();
@@ -44,27 +47,37 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
         return o;
     }
+    public Kayttaja findByUsernameAndPassword(String username, String password) throws SQLException {
+        String koodi = "SELECT * FROM Kayttaja WHERE tunnus = ? AND salasana = ?";
+        UserCollector keraaja = new UserCollector();
+        List<Kayttaja> kayttajat = this.database.queryAndCollect(koodi, keraaja, username, password);
+        System.out.println(kayttajat.size());
+        // TODO: implement
+        return kayttajat.get(0);
+    }
 
     @Override
-    public List<Opiskelija> findAll() throws SQLException {
+    public List<Kayttaja> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
 
         ResultSet rs = stmt.executeQuery();
-        List<Opiskelija> opiskelijat = new ArrayList<>();
+        List<Kayttaja> kayttajat = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
             String nimi = rs.getString("nimi");
+            String tunnus = rs.getString("tunnus");
+            String salasana = rs.getString("salasana");
 
-            opiskelijat.add(new Opiskelija(id, nimi));
+            kayttajat.add(new Kayttaja(id, nimi, tunnus, salasana));
         }
 
         rs.close();
         stmt.close();
         connection.close();
 
-        return opiskelijat;
+        return kayttajat;
     }
 
     @Override

@@ -1,26 +1,23 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
     <head>
-        <title>Ryhmä Huttusen huikea foorumi</title>
-        <meta charset="utf-8" />
+        <title>Sisäänkirjautuminen</title>
+        <meta charset="UTF-8"/>
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     </head>
-
     <body>
-        <h1>Ryhmä Huttusen foorumi</h1>
-        
-        <a href="/kirjautuminen">Kirjaudu sisään</a>
-        
-<!--        <form method="POST" action="/login">
+        <form method="POST" action="/login">
             Käyttäjätunnus:<br/>
             <input type="text" name="tunnus"/><br/>
             Salasana:<br/>
             <input type="text" name="salasana"/><br/>
             <input type="submit" value="Kirjaudu sisään"/>            
-        </form>-->
-
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
-
-        <p>Tästä opiskelijalistaukseen.</p>
+        </form>
     </body>
 </html>
