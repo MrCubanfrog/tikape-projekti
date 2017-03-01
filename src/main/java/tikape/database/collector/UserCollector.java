@@ -18,7 +18,7 @@ public class UserCollector implements Collector<Kayttaja> {
     
     @Override
     public Kayttaja collect(ResultSet rs) throws SQLException {
-        return new Kayttaja(rs.getInt("id"), rs.getString("name"), rs.getString("username"), rs.getString("password"));
+        return new Kayttaja(rs.getInt("id"), rs.getString("nimi"), rs.getString("tunnus"), rs.getString("salasana"));
     }
     
 }

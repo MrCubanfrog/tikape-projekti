@@ -12,8 +12,8 @@ import tikape.runko.domain.Kayttaja;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("jdbc:sqlite:foorumi.db");
-        database.init();
+        Database database = new Database("jdbc:sqlite:src/main/resources/foorumi.db");
+        database.setDebugMode(true);
 
         KayttajaDao KayttajaDao = new KayttajaDao(database);
 
@@ -31,6 +31,12 @@ public class Main {
             return new ModelAndView(map, "kirjautuminen");
         }, new ThymeleafTemplateEngine());
         
+        get("/kirjautuminen2", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            return new ModelAndView(map, "kirjautuminen2");
+        }, new ThymeleafTemplateEngine());
+        
         post("/login", (req, res) -> {
             String tunnus = req.queryParams("tunnus");
             String salasana = req.queryParams("salasana");
@@ -38,7 +44,7 @@ public class Main {
             Kayttaja user = KayttajaDao.findByUsernameAndPassword(tunnus, salasana);
 
             if (user == null) {
-                res.redirect("/");
+                res.redirect("/kirjautuminen2");
                 return "";
             }
 
@@ -58,5 +64,16 @@ public class Main {
                 res.redirect("/");
             }
         });
+        
+        get("/s/users/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("user", KayttajaDao.findOne(Integer.parseInt(req.params(":id"))));
+
+            // get 10 chat messages and add them to the map
+            // NB! use "tsats" as the name for the messages
+            
+            
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
     }
 }

@@ -25,7 +25,7 @@ public class KayttajaDao implements Dao<Kayttaja, Integer> {
     @Override
     public Kayttaja findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Kayttaja WHERE id = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -53,6 +53,9 @@ public class KayttajaDao implements Dao<Kayttaja, Integer> {
         List<Kayttaja> kayttajat = this.database.queryAndCollect(koodi, keraaja, username, password);
         System.out.println(kayttajat.size());
         // TODO: implement
+        if (kayttajat.isEmpty()) {
+            return null;
+        }
         return kayttajat.get(0);
     }
 
@@ -60,7 +63,7 @@ public class KayttajaDao implements Dao<Kayttaja, Integer> {
     public List<Kayttaja> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Kayttaja");
 
         ResultSet rs = stmt.executeQuery();
         List<Kayttaja> kayttajat = new ArrayList<>();
