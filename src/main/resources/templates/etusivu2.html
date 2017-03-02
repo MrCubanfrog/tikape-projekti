@@ -15,8 +15,8 @@ and open the template in the editor.
         <p>Tervetuloa <span th:text="${kayttaja.nimi}">käyttäjän nimi</span></p>
         <a href="/">Kirjaudu ulos</a>
         <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p>
-        <p>Nyt täältä jos haluaa painaa linkkiä alueeseen, a href="/s/jotain"</p>
-        <p>Onhan se kämästä että kahdet eri sivut joutuu väsää jokaselle, mutta ainakin toimii</p>
+        
+        <p>aluekentät</p>
         <ul>
             <li th:each="alue : ${alueet}">
                 <a th:href="@{~/s/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}">Alueet</span></a>

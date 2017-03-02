@@ -12,6 +12,7 @@
         
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
         
+        <p>aluekentät</p>
         <ul>
             <li th:each="alue : ${alueet}">
                 <a th:href="@{~/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}">Alueet</span></a>
@@ -19,9 +20,5 @@
         </ul>
 
 
-        <p>Tähän ne aluekentät</p>
-        <p>Alueet on tosiaan hashmapissa avaimella "alueet"</p>
-        <p>Tällä sivulla, kun alueen nimeä painetaan, on a href="/jotain". HUOM EI a href="/s/jotain", se on kirjautunut sivulle</p>
-        <p>Olisko tyyliin a href="${alue.nimi}" sit mainissa olis olis get("/:nimi", (req, res) -> { String nimi = req.params(); ja lopuks return new ModelAndVieW(map, nimi);</p>
     </body>
 </html>
