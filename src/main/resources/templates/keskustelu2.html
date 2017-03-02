@@ -7,17 +7,17 @@ and open the template in the editor.
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="${alue.otsikko}">TODO supply a title</title>
+        <title th:text="${keskustelu.otsikko}">TODO supply a title</title>
         <meta charset="UTF-8"/>
-        
+       
     </head>
     <body>
-        <div>Tämä on tietyn alueen keskusteluikkuna, <b>sisäänkirjautuneille</b></div>
-        <p>linkki ei vielä toimi</p>
-        <ul>
-            <li th:each="keskustelu : ${alueenKeskustelut}">
-                <a th:href="@{~/s/alueet/{id}/(id=${alue.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
+        <a href="/logout">Kirjaudu ulos</a>
+        <div>Täällä on kanssa keskustelun viestit, tällä kertaa <b>kirjautuneelle</b></div>
+        <ol>
+            <li th:each="viesti : ${keskustelunViestit}">
+                <span th:text="${viesti.teksti}">Viesti</span>
             </li>
-        </ul>
+        </ol>
     </body>
 </html>
