@@ -9,18 +9,15 @@
     <body>
         <h1>Ryhmä Huttusen foorumi</h1>
         
-        <a href="/kirjautuminen">Kirjaudu sisään</a>
         
-<!--        <form method="POST" action="/login">
-            Käyttäjätunnus:<br/>
-            <input type="text" name="tunnus"/><br/>
-            Salasana:<br/>
-            <input type="text" name="salasana"/><br/>
-            <input type="submit" value="Kirjaudu sisään"/>            
-        </form>-->
+        <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
+        
+        
 
-        <p>Ja .. <span th:text="${viesti}">jotain?</span></p>
 
-        <p>Tästä opiskelijalistaukseen.</p>
+        <p>Tähän ne aluekentät</p>
+        <p>Alueet on tosiaan hashmapissa avaimella "alueet"</p>
+        <p>Tällä sivulla, kun alueen nimeä painetaan, on a href="/jotain". HUOM EI a href="/s/jotain", se on kirjautunut sivulle</p>
+        <p>Olisko tyyliin a href="${alue.nimi}" sit mainissa olis olis get("/:nimi", (req, res) -> { String nimi = req.params(); ja lopuks return new ModelAndVieW(map, nimi);</p>
     </body>
 </html>

@@ -5,6 +5,7 @@ import spark.ModelAndView;
 import spark.Session;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+import tikape.runko.database.AlueDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.KayttajaDao;
 import tikape.runko.domain.Kayttaja;
@@ -16,10 +17,12 @@ public class Main {
         database.setDebugMode(true);
 
         KayttajaDao KayttajaDao = new KayttajaDao(database);
+        AlueDao alueDao = new AlueDao(database);
+        
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("alueet", alueDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
@@ -67,13 +70,38 @@ public class Main {
         
         get("/s/users/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("user", KayttajaDao.findOne(Integer.parseInt(req.params(":id"))));
+            map.put("kayttaja", KayttajaDao.findOne(Integer.parseInt(req.params(":id"))));
 
             // get 10 chat messages and add them to the map
             // NB! use "tsats" as the name for the messages
             
             
-            return new ModelAndView(map, "index");
+            return new ModelAndView(map, "kirjautunut");
         }, new ThymeleafTemplateEngine());
+        
+        get("/rekisteroidy", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            return new ModelAndView(map, "rekisteroidy");
+        }, new ThymeleafTemplateEngine());
+        
+        post("/luotunnus", (req, res) -> {
+            String nimi = req.queryParams("nimi");
+            String tunnus = req.queryParams("tunnus");
+            String salasana = req.queryParams("salasana");
+            
+            KayttajaDao.luoKayttaja(nimi, tunnus, salasana);
+            res.redirect("/");
+            return "";
+            
+        });
+        
+//        get("/alue/:id", (req, res) -> {
+//            
+//        });
+//        
+//        get("/s/alue/:id", (req, res) -> {
+//            
+//        });
     }
 }

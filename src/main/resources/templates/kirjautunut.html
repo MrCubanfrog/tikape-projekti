@@ -1,0 +1,22 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ryhmä Huttusen huikea foorumi</title>
+        <meta charset="UTF-8"/>
+        
+    </head>
+    <body>
+        <p>Tervetuloa <span th:text="${kayttaja.nimi}">käyttäjän nimi</span></p>
+        <a href="/">Kirjaudu ulos</a>
+        <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p>
+        <p>Nyt täältä jos haluaa painaa linkkiä alueeseen, a href="/s/jotain"</p>
+        <p>Onhan se kämästä että kahdet eri sivut joutuu väsää jokaselle, mutta ainakin toimii</p>
+        
+    </body>
+</html>

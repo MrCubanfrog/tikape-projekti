@@ -87,5 +87,20 @@ public class KayttajaDao implements Dao<Kayttaja, Integer> {
     public void delete(Integer key) throws SQLException {
         // ei toteutettu
     }
+    
+    public void luoKayttaja(String nimi, String tunnus, String salasana) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Kayttaja(nimi, tunnus, salasana, super) VALUES (?, ?, ?, ?)");
+        
+        stmt.setString(1, nimi);
+        stmt.setString(2, tunnus);
+        stmt.setString(3, salasana);
+        stmt.setBoolean(4, false);
+        
+        stmt.execute();
+        
+        stmt.close();
+        connection.close();
+    }
 
 }
