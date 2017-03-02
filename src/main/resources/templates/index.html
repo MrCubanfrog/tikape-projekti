@@ -12,7 +12,11 @@
         
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
         
-        
+        <ul>
+            <li th:each="alue : ${alueet}">
+                <span th:text="${alue.otsikko}">Alueet</span>
+            </li>
+        </ul>
 
 
         <p>Tähän ne aluekentät</p>

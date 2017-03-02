@@ -95,7 +95,7 @@ public class KayttajaDao implements Dao<Kayttaja, Integer> {
         stmt.setString(1, nimi);
         stmt.setString(2, tunnus);
         stmt.setString(3, salasana);
-        stmt.setBoolean(4, false);
+        stmt.setString(4, "FALSE");
         
         stmt.execute();
         

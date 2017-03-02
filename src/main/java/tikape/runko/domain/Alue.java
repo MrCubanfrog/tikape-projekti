@@ -15,4 +15,11 @@ public class Alue {
         this.otsikko = otsikko;
         this.kuvaus = kuvaus;
     }
+    
+    public String getOtsikko() {
+        return this.otsikko;
+    }
+    public int getId() {
+        return this.id;
+    }
 }

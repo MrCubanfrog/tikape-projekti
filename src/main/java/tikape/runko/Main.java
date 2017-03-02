@@ -1,6 +1,8 @@
 package tikape.runko;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import spark.ModelAndView;
 import spark.Session;
 import static spark.Spark.*;
@@ -8,6 +10,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AlueDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.KayttajaDao;
+import tikape.runko.domain.Alue;
 import tikape.runko.domain.Kayttaja;
 
 public class Main {
@@ -71,6 +74,7 @@ public class Main {
         get("/s/users/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("kayttaja", KayttajaDao.findOne(Integer.parseInt(req.params(":id"))));
+            map.put("alueet", alueDao.findAll());
 
             // get 10 chat messages and add them to the map
             // NB! use "tsats" as the name for the messages
@@ -78,6 +82,17 @@ public class Main {
             
             return new ModelAndView(map, "kirjautunut");
         }, new ThymeleafTemplateEngine());
+        
+//        get("/s/:alue", (req, res) -> {
+//            HashMap map = new HashMap<>();
+//            int alueID = Integer.parseInt(req.params(":alue"));
+//            List<Alue> keskustelu = new ArrayList<>();
+//            //tänne pitää laittaa tietyn alueen keskustelut, eli KeskusteluDao.findAll(id)
+//            map.put(map, keskustelu);
+//            
+//            
+//            return new ModelAndView(map, String.valueOf(alueID));
+//        }, new ThymeleafTemplateEngine());
         
         get("/rekisteroidy", (req, res) -> {
             HashMap map = new HashMap<>();

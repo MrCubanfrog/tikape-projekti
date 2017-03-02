@@ -17,6 +17,10 @@ and open the template in the editor.
         <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p>
         <p>Nyt täältä jos haluaa painaa linkkiä alueeseen, a href="/s/jotain"</p>
         <p>Onhan se kämästä että kahdet eri sivut joutuu väsää jokaselle, mutta ainakin toimii</p>
-        
+        <ul>
+            <li th:each="alue : ${alueet}">
+                <span th:text="${alue.otsikko}">Alueet</span>
+            </li>
+        </ul>
     </body>
 </html>
