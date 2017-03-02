@@ -29,5 +29,8 @@ public class Kayttaja {
     public void setNimi(String nimi) {
         this.nimi = nimi;
     }
+    public String getTunnus() {
+        return this.tunnus;
+    }
 
 }

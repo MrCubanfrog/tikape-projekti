@@ -77,6 +77,7 @@ public class Main {
             }
             
             Session sess = req.session();
+            
             if (sess.attribute("user") == null) {
                 sess.invalidate();
                 res.redirect("/");
