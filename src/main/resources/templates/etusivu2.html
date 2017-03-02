@@ -19,7 +19,7 @@ and open the template in the editor.
         <p>Onhan se kämästä että kahdet eri sivut joutuu väsää jokaselle, mutta ainakin toimii</p>
         <ul>
             <li th:each="alue : ${alueet}">
-                <span th:text="${alue.otsikko}">Alueet</span>
+                <a th:href="@{~/s/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}">Alueet</span></a>
             </li>
         </ul>
     </body>

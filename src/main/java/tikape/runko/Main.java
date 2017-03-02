@@ -10,6 +10,7 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AlueDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.KayttajaDao;
+import tikape.runko.database.KeskusteluDao;
 import tikape.runko.domain.Alue;
 import tikape.runko.domain.Kayttaja;
 
@@ -21,13 +22,14 @@ public class Main {
 
         KayttajaDao KayttajaDao = new KayttajaDao(database);
         AlueDao alueDao = new AlueDao(database);
+        KeskusteluDao keskusteluDao = new KeskusteluDao(database);
         
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("alueet", alueDao.findAll());
 
-            return new ModelAndView(map, "index");
+            return new ModelAndView(map, "etusivu");
         }, new ThymeleafTemplateEngine());
 
         
@@ -80,19 +82,26 @@ public class Main {
             // NB! use "tsats" as the name for the messages
             
             
-            return new ModelAndView(map, "kirjautunut");
+            return new ModelAndView(map, "etusivu2");
         }, new ThymeleafTemplateEngine());
         
-//        get("/s/:alue", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            int alueID = Integer.parseInt(req.params(":alue"));
-//            List<Alue> keskustelu = new ArrayList<>();
-//            //tänne pitää laittaa tietyn alueen keskustelut, eli KeskusteluDao.findAll(id)
-//            map.put(map, keskustelu);
-//            
-//            
-//            return new ModelAndView(map, String.valueOf(alueID));
-//        }, new ThymeleafTemplateEngine());
+        get("/s/alueet/:id/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            int alueID = Integer.parseInt(req.params(":id"));
+            map.put("alue", alueDao.findOne(alueID));
+            map.put("alueenKeskustelut", keskusteluDao.etsiAlueenKeskustelut(alueID));
+            return new ModelAndView(map, "keskustelu2");
+        }, new ThymeleafTemplateEngine());
+        
+        get("/alueet/:id/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            int alueID = Integer.parseInt(req.params(":id"));
+            map.put("alue", alueDao.findOne(alueID));
+            map.put("alueenKeskustelut", keskusteluDao.etsiAlueenKeskustelut(alueID));
+            return new ModelAndView(map, "keskustelu");
+        }, new ThymeleafTemplateEngine());
+        
+        
         
         get("/rekisteroidy", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -110,13 +119,6 @@ public class Main {
             return "";
             
         });
-        
-//        get("/alue/:id", (req, res) -> {
-//            
-//        });
-//        
-//        get("/s/alue/:id", (req, res) -> {
-//            
-//        });
+ 
     }
 }

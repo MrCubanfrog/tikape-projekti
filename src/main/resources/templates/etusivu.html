@@ -14,7 +14,7 @@
         
         <ul>
             <li th:each="alue : ${alueet}">
-                <span th:text="${alue.otsikko}">Alueet</span>
+                <a th:href="@{~/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}">Alueet</span></a>
             </li>
         </ul>
 
