@@ -16,10 +16,10 @@ and open the template in the editor.
         <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
         <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p>
         
-        <p>aluekentät</p>
+        <p>aluekentät (vedä hiiri päälle niin tapahtuu eeppisyyttä;))</p>
         <ul>
             <li th:each="alue : ${alueet}">
-                <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}">Alueen nimi</span></a>
+                <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen nimi</span></a>
             </li>
         </ul>
     </body>

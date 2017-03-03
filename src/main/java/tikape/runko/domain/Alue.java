@@ -22,4 +22,7 @@ public class Alue {
     public int getId() {
         return this.id;
     }
+    public String getKuvaus() {
+        return this.kuvaus;
+    }
 }
