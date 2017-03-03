@@ -14,7 +14,7 @@ and open the template in the editor.
     <body>
         <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
         <div>Tämä on tietyn alueen keskusteluikkuna, <b>sisäänkirjautuneille</b></div>
-        <p>linkki ei vielä toimi</p>
+        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span></p>
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
                 <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/keskustelut/{keskusteluid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>

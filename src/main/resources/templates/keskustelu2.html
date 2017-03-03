@@ -14,6 +14,7 @@ and open the template in the editor.
     <body>
         <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
         <div>Täällä on kanssa keskustelun viestit, tällä kertaa <b>kirjautuneelle</b></div>
+        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span> -> <span th:text="${keskustelu.otsikko}">keskustelun nimi</span></p>
         <ol>
             <li th:each="viesti : ${keskustelunViestit}">
                 <span th:text="${viesti.teksti}">Viesti</span>

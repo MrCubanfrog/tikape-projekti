@@ -15,6 +15,7 @@ and open the template in the editor.
         <div>Täällä on nyt sitten tietyn keskustelun viestit</div>
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
         <p>Ja tää on <b>ei kirjautuneelle</b></p>
+        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span> -> <span th:text="${keskustelu.otsikko}">keskustelun nimi</span></p>
         <ol>
             <li th:each="viesti : ${keskustelunViestit}">
                 <span th:text="${viesti.teksti}">Viesti</span>
