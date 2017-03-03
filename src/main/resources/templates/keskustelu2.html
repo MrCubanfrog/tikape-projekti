@@ -12,7 +12,7 @@ and open the template in the editor.
        
     </head>
     <body>
-        <a href="/logout">Kirjaudu ulos</a>
+        <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
         <div>Täällä on kanssa keskustelun viestit, tällä kertaa <b>kirjautuneelle</b></div>
         <ol>
             <li th:each="viesti : ${keskustelunViestit}">
@@ -20,5 +20,6 @@ and open the template in the editor.
             </li>
         </ol>
         <p>Täällä mahdollisuus lähettää viestejä.</p>
+        <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}">Takaisin keskusteluihin</a>
     </body>
 </html>

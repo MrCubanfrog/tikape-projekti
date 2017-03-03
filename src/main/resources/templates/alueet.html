@@ -16,9 +16,11 @@ and open the template in the editor.
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
-                <a th:href="@{~/keskustelut/{id}/(id=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
+                <a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
             </li>
         </ul>
         <p>Tänne ei keskustelun lisäys mahdollisuutta</p>
+        
+        <a href="/">Takaisin aluelistaukseen</a>
     </body>
 </html>

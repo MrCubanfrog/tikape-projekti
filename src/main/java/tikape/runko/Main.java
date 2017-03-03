@@ -59,7 +59,7 @@ public class Main {
             }
 
             req.session(true).attribute("user", user);
-            res.redirect("/s/users/" + user.getId());
+            res.redirect("/s/users/" + user.getId() + "/");
             return "";
         });
         
@@ -84,7 +84,7 @@ public class Main {
             }
         });
         
-        get("/s/users/:id", (req, res) -> {
+        get("/s/users/:id/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("kayttaja", KayttajaDao.findOne(Integer.parseInt(req.params(":id"))));
             map.put("alueet", alueDao.findAll());
@@ -95,10 +95,12 @@ public class Main {
             
             return new ModelAndView(map, "etusivu2");
         }, new ThymeleafTemplateEngine());
-        
-        get("/s/alueet/:id/", (req, res) -> {
+        //TÄTÄ MUUTETTU
+        get("/s/users/:kayttajaid/alueet/:alueid/", (req, res) -> {
             HashMap map = new HashMap<>();
-            int alueID = Integer.parseInt(req.params(":id"));
+            int kayttajaID = Integer.parseInt(req.params(":kayttajaid"));
+            int alueID = Integer.parseInt(req.params(":alueid"));
+            map.put("kayttaja", KayttajaDao.findOne(kayttajaID));
             map.put("alue", alueDao.findOne(alueID));
             map.put("alueenKeskustelut", keskusteluDao.etsiAlueenKeskustelut(alueID));
             return new ModelAndView(map, "alueet2");
@@ -131,17 +133,23 @@ public class Main {
             
         });
         
-        get("/keskustelut/:id/", (req, res) -> {
+        get("/alueet/:alueid/keskustelut/:keskusteluid/", (req, res) -> {
             HashMap map = new HashMap<>();
-            int keskusteluID = Integer.parseInt(req.params(":id"));
+            int alueID = Integer.parseInt(req.params(":alueid"));
+            int keskusteluID = Integer.parseInt(req.params(":keskusteluid"));
+            map.put("alue", alueDao.findOne(alueID));
             map.put("keskustelu", keskusteluDao.findOne(keskusteluID));
             map.put("keskustelunViestit", viestiDao.etsiKeskustelunViestit(keskusteluID));
             return new ModelAndView(map, "keskustelu");
         }, new ThymeleafTemplateEngine());
         
-        get("/s/keskustelut/:id/", (req, res) -> {
+        get("/s/users/:kayttajaid/alueet/:alueid/keskustelut/:keskusteluid/", (req, res) -> {
             HashMap map = new HashMap<>();
-            int keskusteluID = Integer.parseInt(req.params(":id"));
+            int kayttajaID = Integer.parseInt(req.params(":kayttajaid"));
+            int alueID = Integer.parseInt(req.params(":alueid"));
+            int keskusteluID = Integer.parseInt(req.params(":keskusteluid"));
+            map.put("kayttaja", KayttajaDao.findOne(kayttajaID));
+            map.put("alue", alueDao.findOne(alueID));
             map.put("keskustelu", keskusteluDao.findOne(keskusteluID));
             map.put("keskustelunViestit", viestiDao.etsiKeskustelunViestit(keskusteluID));
             return new ModelAndView(map, "keskustelu2");

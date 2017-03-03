@@ -12,14 +12,15 @@ and open the template in the editor.
         
     </head>
     <body>
-        <a href="/logout">Kirjaudu ulos</a>
+        <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
         <div>Tämä on tietyn alueen keskusteluikkuna, <b>sisäänkirjautuneille</b></div>
         <p>linkki ei vielä toimi</p>
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
-                <a th:href="@{~/s/keskustelut/{id}/(id=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
+                <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/keskustelut/{keskusteluid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
             </li>
         </ul>
         <p>Tänne mahdollisuus lisätä uusi keskustelu HUOM tämä on käyttäjätunnuksen omistavalle</p>
+        <a th:href="@{~/s/users/{kayttajaid}/(kayttajaid=${kayttaja.id})}">Takaisin aluelistaukseen</a>
     </body>
 </html>
